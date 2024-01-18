@@ -81,7 +81,7 @@ function Home() {
 
 
   //Edit todo
-  async function editTodo(index, items) {
+  async function editTodo(items) {
     try {
       const q = query(collection(db, "todos"), where("user_Id", "==", auth.currentUser.uid));
       const querySnapshot = await getDocs(q);
@@ -131,7 +131,7 @@ function Home() {
             <span className='flex mt-2'>
               <button className="border-[2px] rounded-lg border-red-500 hover:bg-red-500 hover:text-white w-[70px] h-[40px] transition-color delay-100" onClick={()=>{deleteTodo(index)}}>Delete</button>
 
-              <button className="border-[2px] ml-1 rounded-lg border-violet-800 hover:bg-violet-900 hover:text-white w-[70px] h-[40px] transition-color delay-75" onClick={()=>{editTodo(index,items)}}>Edit</button>
+              <button className="border-[2px] ml-1 rounded-lg border-violet-800 hover:bg-violet-900 hover:text-white w-[70px] h-[40px] transition-color delay-75" onClick={()=>{editTodo(items)}}>Edit</button>
               </span>
               </li>)
           })}

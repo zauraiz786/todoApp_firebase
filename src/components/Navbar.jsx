@@ -1,9 +1,11 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { signOut } from "firebase/auth";
 import { auth } from "../config/firebaseConfig/firebaseConfig";
+import UserContext from "../context/UserContext";
 
 function Navbar() {
+  const { isUser, setIsUser } = useContext(UserContext);
   const navigate = useNavigate();
   function signOutUser() {
     signOut(auth).then(() => {
@@ -26,12 +28,11 @@ function Navbar() {
               <details>
                 <summary>More</summary>
                 <ul className="p-2 bg-base-100 rounded-t-none">
-                  <li>
+                  {!isUser ? <li>
                     <Link to="login">Login </Link>
-                  </li>
-                  <li>
+                  </li> : <li>
                     <a onClick={signOutUser}>SignOut</a>
-                  </li>
+                  </li>}
                 </ul>
               </details>
             </li>

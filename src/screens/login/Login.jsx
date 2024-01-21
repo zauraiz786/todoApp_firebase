@@ -1,9 +1,11 @@
-import React, {useState} from "react";
+import React, {useContext, useState} from "react";
 import { Link, useNavigate } from 'react-router-dom';
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../../config/firebaseConfig/firebaseConfig";
+import UserContext from "../../context/UserContext";
 
 function Login() {
+  const { setIsUser} = useContext(UserContext);
   const [email,setEmail] = useState("");
   const [password,setPassword] = useState("");
   const[loading,setLoading] = useState(false)
@@ -48,7 +50,7 @@ function Login() {
               Create One..
             </Link>
             <div>
-              <button className="btn btn-primary" type="submit">{loading ? <button className="loading loading-spinner text-primary bg-white"></button> : 'login'}</button>
+              <button className="btn btn-primary" type="submit" onClick={()=>{setIsUser(true)}}>{loading ? <button className="loading loading-spinner text-primary bg-white"></button> : 'login'}</button>
               
             </div>
           </form>
